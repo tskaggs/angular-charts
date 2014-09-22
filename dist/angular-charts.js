@@ -81,8 +81,15 @@ angular.module('angularCharts').directive('acChart', [
           lineCurveType: 'cardinal',
           isAnimate: true
         };
-      var totalWidth = element[0].clientWidth;
-      var totalHeight = element[0].clientHeight;
+      if (element[0].clientHeight > 0 && element[0].clientWidth > 0) {
+        var totalWidth = element[0].clientWidth;
+        var totalHeight = element[0].clientHeight;
+      } else {
+        // This is a hardcode fix for graphs in tabs
+        var totalWidth = 370;
+        var totalHeight = 300;
+      }
+
       if (totalHeight === 0 || totalWidth === 0) {
         throw new Error('Please set height and width for the chart element');
       }
